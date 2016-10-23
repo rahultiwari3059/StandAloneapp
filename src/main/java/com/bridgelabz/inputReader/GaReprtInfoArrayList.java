@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import com.bridgelabz.Csvfilecreator.AllElementCSvFileCreator;
 import com.bridgelabz.Csvfilecreator.AppOpenCsvCreator;
 import com.bridgelabz.Csvfilecreator.AppReOpenCsvCreator;
+import com.bridgelabz.Csvfilecreator.SummaryReportCsvFilecreator;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.SecretFileModel;
 
@@ -58,12 +59,8 @@ public class GaReprtInfoArrayList {
 			AppOpenCsvCreator appOpenCsvCreatorObject= new AppOpenCsvCreator(secretFileModelObject);
 			
 			AppReOpenCsvCreator appReOpenCsvCreatorObject= new AppReOpenCsvCreator(secretFileModelObject);
-		/*	// passing secret model object by constructor
-			SummaryReportcsvandelelementAssigner directCsvFileCreatorObject = new SummaryReportcsvandelelementAssigner(secretFileModelObject);
-
-			// passing secret model object by constructor
-			MainCsvCreator mainCsvCreatorObject = new MainCsvCreator(secretFileModelObject);*/
-
+		
+			SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject= new SummaryReportCsvFilecreator(secretFileModelObject);
 			// casting into jsonArray
 			JSONArray gaReportInfoArray = (JSONArray) jsonObject.get("GAReportInfo");
 

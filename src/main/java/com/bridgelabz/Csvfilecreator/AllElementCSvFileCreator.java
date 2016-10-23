@@ -14,16 +14,24 @@ public class AllElementCSvFileCreator {
 
 	static String csvFilePath;
 
+	// argument constructor
 	public AllElementCSvFileCreator(SecretFileModel secretFileModelObject) {
 		csvFilePath = secretFileModelObject.getCsvFilePath();
 	}
 
 	public AllElementCSvFileCreator() {
-		// TODO Auto-generated constructor stub
+
 	}
+	 HashSet<String> androidIdAppOpen1= new HashSet<String>();
+	// creating object of SummaryReportCsvFilecreator
+	
+	SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject= new SummaryReportCsvFilecreator();
 	// method to create appOpen CSv creator
 	public void allElementCSvFileCreator(ArrayList<AllElementModels> allElementModelArrayListObject,
-			GaReportInputModel gaReportInputModel) {
+			GaReportInputModel gaReportInputModel, HashSet<String> androidIdAppOpen, HashSet<String> androidIdReAppOpen) {
+		androidIdAppOpen1.addAll(androidIdReAppOpen);
+		//creating Hashmap of Android id 
+		
 		// creating HashSet object to add android id
 		HashSet<String> androidIdAllElement = new HashSet<String>();
 		try {
@@ -42,9 +50,8 @@ public class AllElementCSvFileCreator {
 				bw1.newLine();
 			}
 
-
 			for (int i = 0; i < allElementModelArrayListObject.size(); i++) {
-				
+
 				bw1.append(gaReportInputModel.getmGaID());
 				bw1.append("^");
 
@@ -61,12 +68,15 @@ public class AllElementCSvFileCreator {
 				bw1.newLine();
 
 			}
-			//System.out.println(androidIdAllElement.size());
+			System.out.println(androidIdAllElement.size());
 			bw1.close();
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
+		summaryReportCsvFilecreatorObject.summaryReportCsvFilecreator( allElementModelArrayListObject, gaReportInputModel,androidIdAppOpen1);
 
 	}
 }

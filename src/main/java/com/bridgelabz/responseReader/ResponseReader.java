@@ -74,7 +74,15 @@ public class ResponseReader {
 				// making JSONArray of rows
 
 				JSONArray rowarray = (JSONArray) dataobject.get("rows");
-
+				
+				
+				if ((JSONArray) dataobject.get("rows") == null) {
+					
+					responseModelObject.setDimensionHashMapArrayList(null);
+					responseModelObject.setMetricHashMapArrayList(null);
+				}
+				else
+				{
 				for (int i = 0; i < rowarray.size(); i++) {
 
 					// creating HashMap of dimension
@@ -130,6 +138,7 @@ public class ResponseReader {
 			
 				//setting value into response model class 
 				responseModelObject.setDimensionHashMapArrayList(dimensionHashMapArrayList);
+			}
 			}
 			responseModelArrayList.add(responseModelObject);
 

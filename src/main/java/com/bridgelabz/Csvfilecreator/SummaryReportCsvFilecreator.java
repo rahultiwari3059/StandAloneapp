@@ -8,95 +8,53 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
-import com.bridgelabz.model.AppOpenModel;
+import com.bridgelabz.model.AllElementModels;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.SecretFileModel;
 
-public class AppOpenCsvCreator {
+public class SummaryReportCsvFilecreator {
+
 	static String csvFilePath;
 
-	// argument constructor to get the CSvfile path where we have to create csv
-	// file
-	public AppOpenCsvCreator(SecretFileModel secretFileModelObject) {
-		csvFilePath = secretFileModelObject.getCsvFilePath();
+	// arrayList of Unique date
+	ArrayList<String> Uniquedate = new ArrayList<String>();
 
+	// array list of unique total unique android id
+	ArrayList<String> totalUniqueAndroidId = new ArrayList<String>();
+
+	public SummaryReportCsvFilecreator(SecretFileModel secretFileModelObject) {
+		csvFilePath = secretFileModelObject.getCsvFilePath();
 	}
 
-	// default constructor
-	public AppOpenCsvCreator() {
+	public SummaryReportCsvFilecreator() {
 		
 	}
-		// arrayList of Unique date
-		ArrayList<String> Uniquedate = new ArrayList<String>();
 
-		// array list of unique total unique android id
-		ArrayList<String> totalUniqueAndroidId = new ArrayList<String>();
-
-	// method to create appOpen CSv creator
-	public HashSet<String> appOpenCsvCreator(ArrayList<AppOpenModel> appOpenModelArrayListObject,
-			GaReportInputModel gaReportInputModel) {
-		// creating HashSet object to add android id
-		HashSet<String> androidIdAppOpen = new HashSet<String>();
+	public void summaryReportCsvFilecreator(ArrayList<AllElementModels> allElementModelArrayListObject,
+			GaReportInputModel gaReportInputModel, HashSet<String> androidIdAppOpen1) {
 		try {
-
-			boolean b = false;
-			File file1 = new File(csvFilePath + "appOpen.csv");
-			if (!file1.exists()) {
-				b = true;
-			}
-			FileWriter fw1 = new FileWriter(file1.getAbsoluteFile(), true);
-			BufferedWriter bw1 = new BufferedWriter(fw1);
-			if (b) {
-				file1.createNewFile();
-
-				bw1.append("gaid^gadiscription^AndroidId^Eventcategory^Date^");
-				bw1.newLine();
-			}
-
-			for (int i = 0; i < appOpenModelArrayListObject.size(); i++) {
-
-				bw1.append(gaReportInputModel.getmGaID());
-				bw1.append("^");
-
-				bw1.append(gaReportInputModel.getmGaDiscription());
-				bw1.append("^");
-
-				bw1.append(appOpenModelArrayListObject.get(i).getmAndroidId());
-				androidIdAppOpen.add(appOpenModelArrayListObject.get(i).getmAndroidId());
-				bw1.append("^");
-
-				bw1.append(appOpenModelArrayListObject.get(i).getmEventcategory());
-				bw1.append("^");
-
-				bw1.append(appOpenModelArrayListObject.get(i).getmDate());
-				bw1.append("^");
-
-				bw1.newLine();
-
-			}
-			bw1.close();
 			// HasMap of date and androidset
 			HashMap<String, HashSet<String>> dateAnNdroidIdmap = new HashMap<String, HashSet<String>>();
-
-			for (int k = 0; k < appOpenModelArrayListObject.size(); k++) {
+			//System.out.println(androidIdAppOpen1.size());
+			for (int k = 0; k < allElementModelArrayListObject.size(); k++) {
 				// if
 				// (androidIdAppOpen1.contains(allElementModelArrayListObject.get(k).getmAndroidId()))
 				// {
 				// assigning date
-				String date = appOpenModelArrayListObject.get(k).getmDate();
+				String date = allElementModelArrayListObject.get(k).getmDate();
 
 				// checking whether map contains date
 				if (dateAnNdroidIdmap.containsKey(date)) {
 					// HashSet for unique andoidId
 					HashSet<String> androidset = dateAnNdroidIdmap.get(date);
 					// adding into android set
-					androidset.add(appOpenModelArrayListObject.get(k).getmAndroidId());
+					androidset.add(allElementModelArrayListObject.get(k).getmAndroidId());
 					// putting into HashMap
 					dateAnNdroidIdmap.put(date, androidset);
 				} else {
 
 					// assigning in android id
-					String AndoidId = appOpenModelArrayListObject.get(k).getmAndroidId();
+					String AndoidId = allElementModelArrayListObject.get(k).getmAndroidId();
 					// HashSet of android set
 					HashSet<String> androidset = new HashSet<String>();
 					// adding into android set
@@ -106,7 +64,8 @@ public class AppOpenCsvCreator {
 
 				}
 			}
-			/*----------------- adding into array list after fetching from hash map ------------------------------*/
+			// }
+	/*----------------- adding into array list after fetching from hash map ------------------------------*/
 			for (Entry<String, HashSet<String>> m1 : dateAnNdroidIdmap.entrySet()) {
 				// adding into array list
 				Uniquedate.add(m1.getKey());
@@ -114,16 +73,18 @@ public class AppOpenCsvCreator {
 				totalUniqueAndroidId.add(String.valueOf(m1.getValue().size()));
 				// printing corresponding value
 				System.out.println(m1.getKey() + " " + m1.getValue().size());
-			}	// for csv file creation
-			boolean b1 = false;
+			}
+	/*-------------------------- for creating summary report CSv------------------------------------------ */
+			// for csv file creation
+			boolean b = false;
 			// CSV creator for number of summary Report
 			File file = new File(csvFilePath + "summaryreport.csv");
 			if (!file.exists()) {
-				b1 = true;
+				b = true;
 			}
 			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			if (b1) {
+			if (b) {
 				file.createNewFile();
 				// appending id and ga discription
 				bw.append("gaid");
@@ -150,12 +111,13 @@ public class AppOpenCsvCreator {
 				bw.newLine();
 			}
 			bw.close();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-
 		}
-return androidIdAppOpen;
+
+		catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
 	}
+
 }
