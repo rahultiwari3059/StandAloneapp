@@ -132,19 +132,19 @@ public class InitializeAnalyticsReporting {
 					// adding into dimensfilterList after setting the parameter
 					dimensfilterList.add(dimensionFilter.setDimensionName(words[0]).setOperator("EXACT")
 							.setExpressions(Arrays.asList(words[1])));
-					System.out.println("equals");
+					//System.out.println("equals");
 				} else if (dimensionfilter.contains(s1))
 
 				{
 					String[] words = dimensionfilter.split("=@:");
 					dimensfilterList.add(dimensionFilter.setDimensionName(words[0]).setOperator("PARTIAL")
 							.setExpressions(Arrays.asList(words[1])));
-					System.out.println("at the rate");
+					//System.out.println("at the rate");
 				} else {
 					String[] words = dimensionfilter.split("=@");
 					dimensfilterList.add(dimensionFilter.setDimensionName(words[0]).setOperator("PARTIAL")
 							.setExpressions(Arrays.asList(words[1])));
-					System.out.println("at the rate");
+					//System.out.println("at the rate");
 
 				}
 

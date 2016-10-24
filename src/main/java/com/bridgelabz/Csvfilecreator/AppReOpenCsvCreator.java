@@ -37,10 +37,13 @@ public class AppReOpenCsvCreator {
 		try {
 
 			boolean b = false;
-			File file1 = new File(csvFilePath + "appReopen.csv");
-			if (!file1.exists()) {
+			File file1 = new File(csvFilePath + "GAReportappReopen.csv");
+			if (file1.exists())
+				file1.delete();
+			
+			if (!file1.exists()) 
 				b = true;
-			}
+			
 			FileWriter fw1 = new FileWriter(file1.getAbsoluteFile(), true);
 			BufferedWriter bw1 = new BufferedWriter(fw1);
 			if (b) {
@@ -102,6 +105,7 @@ public class AppReOpenCsvCreator {
 
 				}
 			}
+
 			/*----------------- adding into array list after fetching from hash map ------------------------------*/
 			for (Entry<String, HashSet<String>> m1 : dateAnNdroidIdmap.entrySet()) {
 				// adding into array list
@@ -109,7 +113,7 @@ public class AppReOpenCsvCreator {
 				// adding into array list
 				totalUniqueAndroidId.add(String.valueOf(m1.getValue().size()));
 				// printing corresponding value
-				System.out.println(m1.getKey() + " " + m1.getValue().size());
+				//System.out.println(m1.getKey() + " " + m1.getValue().size());
 			} // for csv file creation
 			boolean b1 = false;
 			// CSV creator for number of summary Report

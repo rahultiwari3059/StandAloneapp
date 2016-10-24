@@ -27,7 +27,7 @@ public class SummaryReportCsvFilecreator {
 	}
 
 	public SummaryReportCsvFilecreator() {
-		
+
 	}
 
 	public void summaryReportCsvFilecreator(ArrayList<AllElementModels> allElementModelArrayListObject,
@@ -35,7 +35,7 @@ public class SummaryReportCsvFilecreator {
 		try {
 			// HasMap of date and androidset
 			HashMap<String, HashSet<String>> dateAnNdroidIdmap = new HashMap<String, HashSet<String>>();
-			//System.out.println(androidIdAppOpen1.size());
+			// System.out.println(androidIdAppOpen1.size());
 			for (int k = 0; k < allElementModelArrayListObject.size(); k++) {
 				// if
 				// (androidIdAppOpen1.contains(allElementModelArrayListObject.get(k).getmAndroidId()))
@@ -65,23 +65,26 @@ public class SummaryReportCsvFilecreator {
 				}
 			}
 			// }
-	/*----------------- adding into array list after fetching from hash map ------------------------------*/
+			/*----------------- adding into array list after fetching from hash map ------------------------------*/
 			for (Entry<String, HashSet<String>> m1 : dateAnNdroidIdmap.entrySet()) {
 				// adding into array list
 				Uniquedate.add(m1.getKey());
 				// adding into array list
 				totalUniqueAndroidId.add(String.valueOf(m1.getValue().size()));
 				// printing corresponding value
-				System.out.println(m1.getKey() + " " + m1.getValue().size());
+				//System.out.println(m1.getKey() + " " + m1.getValue().size());
 			}
-	/*-------------------------- for creating summary report CSv------------------------------------------ */
+			/*-------------------------- for creating summary report CSv------------------------------------------ */
 			// for csv file creation
 			boolean b = false;
 			// CSV creator for number of summary Report
 			File file = new File(csvFilePath + "summaryreport.csv");
-			if (!file.exists()) {
+			/*if (file.exists())
+				file.delete();*/
+
+			if (!file.exists())
 				b = true;
-			}
+
 			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			if (b) {

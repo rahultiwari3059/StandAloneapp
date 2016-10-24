@@ -45,6 +45,8 @@ public class GoogleAnalyticReporting {
 						gaReportInputInfoArrayList.get(i));
 
 			}
+			
+			System.out.println("all reports are created");
 
 		} catch (Exception e) {
 

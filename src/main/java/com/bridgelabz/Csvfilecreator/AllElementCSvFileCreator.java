@@ -22,25 +22,30 @@ public class AllElementCSvFileCreator {
 	public AllElementCSvFileCreator() {
 
 	}
-	 HashSet<String> androidIdAppOpen1= new HashSet<String>();
+
+	HashSet<String> androidIdAppOpen1 = new HashSet<String>();
 	// creating object of SummaryReportCsvFilecreator
-	
-	SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject= new SummaryReportCsvFilecreator();
+
+	SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject = new SummaryReportCsvFilecreator();
+
 	// method to create appOpen CSv creator
 	public void allElementCSvFileCreator(ArrayList<AllElementModels> allElementModelArrayListObject,
-			GaReportInputModel gaReportInputModel, HashSet<String> androidIdAppOpen, HashSet<String> androidIdReAppOpen) {
+			GaReportInputModel gaReportInputModel, HashSet<String> androidIdAppOpen,
+			HashSet<String> androidIdReAppOpen) {
 		androidIdAppOpen1.addAll(androidIdReAppOpen);
-		//creating Hashmap of Android id 
-		
+		// creating HashMap of Android id
+
 		// creating HashSet object to add android id
 		HashSet<String> androidIdAllElement = new HashSet<String>();
 		try {
 
-			boolean b = false;
+			/*boolean b = false;
 			File file1 = new File(csvFilePath + "allElement.csv");
-			if (!file1.exists()) {
+			if (file1.exists())
+				file1.delete();
+			if (!file1.exists())
 				b = true;
-			}
+
 			FileWriter fw1 = new FileWriter(file1.getAbsoluteFile(), true);
 			BufferedWriter bw1 = new BufferedWriter(fw1);
 			if (b) {
@@ -68,15 +73,15 @@ public class AllElementCSvFileCreator {
 				bw1.newLine();
 
 			}
-			System.out.println(androidIdAllElement.size());
-			bw1.close();
+		
+			bw1.close();*/
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-		summaryReportCsvFilecreatorObject.summaryReportCsvFilecreator( allElementModelArrayListObject, gaReportInputModel,androidIdAppOpen1);
+		summaryReportCsvFilecreatorObject.summaryReportCsvFilecreator(allElementModelArrayListObject,
+				gaReportInputModel, androidIdAppOpen1);
 
 	}
 }

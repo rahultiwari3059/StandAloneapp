@@ -15,12 +15,10 @@ import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.ResponseModel;
 
 public class ResponseElementReader {
-	
+
 	// creating object of dimensionHashMapArrayList to store
 	// dimensionHashMapArrayList
 	ArrayList<HashMap<String, String>> dimensionHashMapArrayList = new ArrayList<HashMap<String, String>>();
-
-	
 
 	// creating object of AppOpenCsvCreator class
 	AppOpenCsvCreator appOpenCsvCreatorObject = new AppOpenCsvCreator();
@@ -28,10 +26,11 @@ public class ResponseElementReader {
 	AppReOpenCsvCreator appReOpenCsvCreatorObject = new AppReOpenCsvCreator();
 	// creating object of AllElementCSvFileCreator class
 	AllElementCSvFileCreator allElementCSvFileCreatorObject = new AllElementCSvFileCreator();
-	//
-	HashSet<String> androidIdAppOpen ;
-	//
+	//hash set for app open android id 
+	HashSet<String> androidIdAppOpen;
+	//hash set for app Reopen android id 
 	HashSet<String> androidIdReAppOpen;
+
 	public void responseElementReader(ResponseModel responseModelObject, GaReportInputModel gaReportInputModel) {
 		try {
 			// creating object of ArrayListAppOpenModel
@@ -46,7 +45,7 @@ public class ResponseElementReader {
 			boolean allElementFlag1 = false;
 			// assigning to dimensionHashMapArrayList
 			dimensionHashMapArrayList = responseModelObject.getDimensionHashMapArrayList();
-/*-----------------------if responseobject have null value------------------------*/			
+			/*-----------------------if response object have null value------------------------*/
 			if (dimensionHashMapArrayList.equals("null")) {
 				AllElementModels allElementModelsObject = new AllElementModels();
 				allElementModelsObject.setmDate("");
@@ -63,8 +62,6 @@ public class ResponseElementReader {
 					// iterating element of hashmapArrayList
 					for (Entry<String, String> m1 : dimensionHashMapArrayList.get(i).entrySet()) {
 
-						// System.out.println(m1.getKey() + " " +
-						// m1.getValue());
 						/*----------------------------------for appOpen-----------------------------------------------------*/
 						if (gaReportInputModel.getmGaID().equals("1")) {
 
@@ -111,7 +108,7 @@ public class ResponseElementReader {
 							}
 
 						}
-						/*-------------if other than appopen and ReOpen------*/
+						/*-------------if other than App open and ReOpen------*/
 						if (!gaReportInputModel.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
 
 							allElementModelsObject.setmGaid(gaReportInputModel.getmGaID());
@@ -138,25 +135,27 @@ public class ResponseElementReader {
 						allElementModelArrayListObject.add(allElementModelsObject);
 				}
 			}
-			System.out.println(allElementModelArrayListObject.toString());
+			// System.out.println(allElementModelArrayListObject.toString());
 			// method to create appOpen CSvfile
 			if (gaReportInputModel.getmGaID().equals("1")) {
-				androidIdAppOpen=appOpenCsvCreatorObject.appOpenCsvCreator(appOpenModelArrayListObject, gaReportInputModel);
+				androidIdAppOpen = appOpenCsvCreatorObject.appOpenCsvCreator(appOpenModelArrayListObject,
+						gaReportInputModel);
 			}
 			// method to create appOpen CSvfile
 			if (gaReportInputModel.getmGaID().equals("2")) {
-				androidIdReAppOpen=	appReOpenCsvCreatorObject.appReOpenCsvCreator(appReOpenModelArrayListObject, gaReportInputModel);
+				androidIdReAppOpen = appReOpenCsvCreatorObject.appReOpenCsvCreator(appReOpenModelArrayListObject,
+						gaReportInputModel);
 
 			}
 			// method to create all other than AppOpen and Reopen
 			if (!gaReportInputModel.getmGaID().equals("1") && !gaReportInputModel.getmGaID().equals("2")) {
 				allElementCSvFileCreatorObject.allElementCSvFileCreator(allElementModelArrayListObject,
-						gaReportInputModel,androidIdAppOpen,androidIdReAppOpen);
+						gaReportInputModel, androidIdAppOpen, androidIdReAppOpen);
 			}
 
 		} catch (Exception e) {
-
-			e.printStackTrace();
+			System.out.println("there is 0 rows in response");
+			//e.printStackTrace();
 
 		}
 	}

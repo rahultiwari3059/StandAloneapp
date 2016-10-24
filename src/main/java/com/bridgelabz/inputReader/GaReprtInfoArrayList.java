@@ -12,7 +12,7 @@ import com.bridgelabz.Csvfilecreator.AppReOpenCsvCreator;
 import com.bridgelabz.Csvfilecreator.SummaryReportCsvFilecreator;
 import com.bridgelabz.model.GaReportInputModel;
 import com.bridgelabz.model.SecretFileModel;
-
+import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
 import com.bridgelabz.responseFetcher.InitializeAnalyticsReporting;
 
 public class GaReprtInfoArrayList {
@@ -53,14 +53,18 @@ public class GaReprtInfoArrayList {
 
 			InitializeAnalyticsReporting initializeAnalyticsReportingObject = new InitializeAnalyticsReporting(
 					secretFileModelObject);
-			
-			AllElementCSvFileCreator allElementCSvFileCreatorObject= new AllElementCSvFileCreator(secretFileModelObject);
-			
-			AppOpenCsvCreator appOpenCsvCreatorObject= new AppOpenCsvCreator(secretFileModelObject);
-			
-			AppReOpenCsvCreator appReOpenCsvCreatorObject= new AppReOpenCsvCreator(secretFileModelObject);
-		
-			SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject= new SummaryReportCsvFilecreator(secretFileModelObject);
+
+			AllElementCSvFileCreator allElementCSvFileCreatorObject = new AllElementCSvFileCreator(
+					secretFileModelObject);
+
+			AppOpenCsvCreator appOpenCsvCreatorObject = new AppOpenCsvCreator(secretFileModelObject);
+
+			AppReOpenCsvCreator appReOpenCsvCreatorObject = new AppReOpenCsvCreator(secretFileModelObject);
+
+			SummaryReportCsvFilecreator summaryReportCsvFilecreatorObject = new SummaryReportCsvFilecreator(
+					secretFileModelObject);
+
+			GaReportResponseFetcher gaReportResponseFetcherObject = new GaReportResponseFetcher(secretFileModelObject);
 			// casting into jsonArray
 			JSONArray gaReportInfoArray = (JSONArray) jsonObject.get("GAReportInfo");
 

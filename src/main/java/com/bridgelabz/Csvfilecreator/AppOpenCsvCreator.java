@@ -24,13 +24,14 @@ public class AppOpenCsvCreator {
 
 	// default constructor
 	public AppOpenCsvCreator() {
-		
-	}
-		// arrayList of Unique date
-		ArrayList<String> Uniquedate = new ArrayList<String>();
 
-		// array list of unique total unique android id
-		ArrayList<String> totalUniqueAndroidId = new ArrayList<String>();
+	}
+
+	// arrayList of Unique date
+	ArrayList<String> Uniquedate = new ArrayList<String>();
+
+	// array list of unique total unique android id
+	ArrayList<String> totalUniqueAndroidId = new ArrayList<String>();
 
 	// method to create appOpen CSv creator
 	public HashSet<String> appOpenCsvCreator(ArrayList<AppOpenModel> appOpenModelArrayListObject,
@@ -40,10 +41,13 @@ public class AppOpenCsvCreator {
 		try {
 
 			boolean b = false;
-			File file1 = new File(csvFilePath + "appOpen.csv");
-			if (!file1.exists()) {
+			File file1 = new File(csvFilePath + "GAReportAppOpen.csv");
+			if (file1.exists())
+				file1.delete();
+
+			if (!file1.exists()) 
 				b = true;
-			}
+			
 			FileWriter fw1 = new FileWriter(file1.getAbsoluteFile(), true);
 			BufferedWriter bw1 = new BufferedWriter(fw1);
 			if (b) {
@@ -113,14 +117,17 @@ public class AppOpenCsvCreator {
 				// adding into array list
 				totalUniqueAndroidId.add(String.valueOf(m1.getValue().size()));
 				// printing corresponding value
-				System.out.println(m1.getKey() + " " + m1.getValue().size());
-			}	// for csv file creation
+				//System.out.println(m1.getKey() + " " + m1.getValue().size());
+			} // for csv file creation
 			boolean b1 = false;
 			// CSV creator for number of summary Report
 			File file = new File(csvFilePath + "summaryreport.csv");
-			if (!file.exists()) {
+			if (file.exists())
+				file.delete();
+			
+			if (!file.exists()) 
 				b1 = true;
-			}
+			
 			FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			if (b1) {
@@ -150,12 +157,11 @@ public class AppOpenCsvCreator {
 				bw.newLine();
 			}
 			bw.close();
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-return androidIdAppOpen;
+		return androidIdAppOpen;
 	}
 }
